@@ -1,0 +1,181 @@
+{
+  "apiKey": "sk-REPLACE_ME",
+  "baseUrl": "https://api.deepseek.com/v1",
+  "model": "deepseek-flash",
+  "roleCard": "role.md",
+  "roleMaxChars": 16000,
+  "learning": {
+    "enabled": true,
+    "intervalHours": 2,
+    "maxCorpusChars": 40000,
+    "maxDigestSessions": 3,
+    "maxLookbackHours": 12,
+    "report": "fail"
+  },
+  "names": [
+    "助手",
+    "小助手"
+  ],
+  "keywords": [
+    "助手",
+    "小助手"
+  ],
+  "ownerIds": [
+    "123456789"
+  ],
+  "onebot": {
+    "wsUrl": "ws://127.0.0.1:3001",
+    "httpUrl": "http://127.0.0.1:3000",
+    "accessToken": ""
+  },
+  "wake": {
+    "groupAtOnly": true,
+    "probability": 0.05,
+    "privateWindowMs": 2500,
+    "groupWindowMs": 5000,
+    "nameMention": true
+  },
+  "limits": {
+    "privateCooldownMs": 0,
+    "groupCooldownMs": 0,
+    "globalPerMinute": -1,
+    "perMinute": 8
+  },
+  "groupChime": {
+    "enabled": true,
+    "quietHours": [
+      0,
+      8
+    ],
+    "windowMinutes": 10,
+    "minMessages": 4,
+    "minSpeakers": 2,
+    "minGapMinutes": 0,
+    "maxPerGroupPerDay": -1,
+    "maxPerDay": -1,
+    "maxStreak": 2,
+    "chance": 0.3,
+    "declineGapMinutes": 2,
+    "lingerMs": 6000,
+    "maxWaitMs": 30000,
+    "allowGroups": [],
+    "blockGroups": [],
+    "idleMinutes": 6,
+    "warmRate": 0.7,
+    "hotRate": 1.5,
+    "hotExtraPerDay": 0,
+    "maxPerMinute": 3
+  },
+  "thinking": {
+    "enabled": true,
+    "effort": "high"
+  },
+  "temperature": 1,
+  "humanize": {
+    "enabled": true,
+    "msPerChar": 85,
+    "minMs": 1200,
+    "maxMs": 6000,
+    "jitter": 0.2,
+    "burstMax": 3,
+    "gapRange": [
+      0,
+      0
+    ],
+    "longGapChance": 0,
+    "longGapRange": [
+      3000,
+      9000
+    ]
+  },
+  "dataDir": "./data",
+  "diaryDir": "./data/diary",
+  "diaryMaxChars": 2000,
+  "tools": {
+    "enabled": true,
+    "rounds": 4
+  },
+  "vision": {
+    "enabled": true,
+    "maxBytes": 8388608,
+    "pythonPath": "python"
+  },
+  "proactive": {
+    "enabled": true,
+    "quietHours": [
+      0,
+      8
+    ],
+    "minIdleHours": 3,
+    "maxPerDay": 2,
+    "chance": 0.4,
+    "checkMinutes": 15
+  },
+  "stickers": {
+    "enabled": true,
+    "dir": "./assets/stickers",
+    "cooldownMs": 0,
+    "maxPerTurn": 1,
+    "maxBytes": 8388608
+  },
+  "groupStyle": {
+    "enabled": true,
+    "minSamples": 8,
+    "maxSamples": 80
+  },
+  "dialogue": {
+    "sceneEnabled": true,
+    "sceneTimeoutMs": 12000,
+    "harness": {
+      "enabled": false,
+      "models": [
+        "kimi-k3.1-pro",
+        "doubao-seed-2.1-pro"
+      ],
+      "executable": "C:/Path/To/DeepSeek Harness.exe",
+      "cliFile": "",
+      "credentialFile": "",
+      "root": "./local/scene-harness",
+      "timeoutMs": 20000,
+      "maxConcurrent": 2,
+      "maxCallsPerDay": 120
+    },
+    "replyHarness": {
+      "enabled": false,
+      "models": [
+        "kimi-k3.1-pro",
+        "doubao-seed-2.1-pro"
+      ],
+      "executable": "C:/Path/To/DeepSeek Harness.exe",
+      "cliFile": "",
+      "credentialFile": "",
+      "root": "./local/scene-harness",
+      "timeoutMs": 45000,
+      "maxConcurrent": 2,
+      "maxCallsPerDay": 120,
+      "purpose": "reply",
+      "profileDir": "reply-profiles"
+    }
+  },
+  "context": {
+    "requestChars": 120000,
+    "historyMessages": 48,
+    "historyChars": 24000,
+    "situationChars": 18000
+  },
+  "memory": {
+    "maxRecent": 192,
+    "compactAt": 96,
+    "keepRecent": 48
+  },
+  "groupContext": {
+    "enabled": true,
+    "maxMessages": 96,
+    "maxChars": 12000,
+    "maxAgeMs": 7200000,
+    "topicGapMs": 360000
+  },
+  "banter": {
+    "corpusFile": "./data/public-memes.json"
+  }
+}

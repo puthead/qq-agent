@@ -1,0 +1,21 @@
+{
+  "name": "qq-agent",
+  "version": "1.0.0",
+  "private": true,
+  "description": "住在本机、跑在 QQ 里的对话角色：NapCat + Node + 任意 OpenAI 兼容模型，身份与性格由 role.md 定义。",
+  "type": "module",
+  "main": "server-src/lib.js",
+  "bin": {
+    "qq-agent": "server-src/index.js"
+  },
+  "scripts": {
+    "check": "node server-src/index.js --check --config ./config.json",
+    "dry": "node server-src/index.js --dry-run --config ./config.json",
+    "start": "node server-src/index.js --config ./config.json",
+    "test": "node server-src/run-tests.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "MIT"
+}

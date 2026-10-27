@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import { GroupContext } from './group-context.js';
+const g = new GroupContext({ maxMessages: 48, maxChars: 3200, maxAgeMs: 60000 });
+g.add('group:a', { messageId: 12, name: '甲', text: '前'.repeat(180) + '关键结论在后面' });
+assert.match(g.render('group:a'), /关键结论在后面/);
+assert.equal(g.render('group:a', { excludeIds: ['12'] }), '');
+assert.equal(g.render('group:b'), '');
+g.add('group:a', { messageId: '13', text: '接上句' });
+assert.match(g.contextBefore('group:a', '13')[0].text, /关键结论在后面/);
+for (const row of g.groups.get('group:a')) row.t -= 61000;
+assert.equal(g.render('group:a'), '');
+assert.equal(g.contextBefore('group:a', '13').length, 0);
+assert.equal(g.count('group:a'), 0);
+const small = new GroupContext({ maxChars: 200 });
+small.add('group:a', { text: '长'.repeat(600) });
+assert.ok(small.render('group:a', { header: '', footer: '' }).length <= 200);
+console.log('PASS 上下文尾部信息、引用前因、群隔离、ID 类型、读取过期、长度上限');

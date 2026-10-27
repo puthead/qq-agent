@@ -1,0 +1,6 @@
+{
+  "dialogue": { "sceneEnabled": true, "sceneTimeoutMs": 12000 },
+  "context": { "requestChars": 120000, "historyMessages": 48, "historyChars": 24000, "situationChars": 18000 },
+  "memory": { "maxRecent": 192, "compactAt": 96, "keepRecent": 48 },
+  "groupContext": { "enabled": true, "maxMessages": 96, "maxChars": 12000, "maxAgeMs": 7200000, "topicGapMs": 360000 }
+}

@@ -1,0 +1,70 @@
+{
+  "wake": {
+    "groupAtOnly": true,
+    "probability": 0.05,
+    "privateWindowMs": 2500,
+    "groupWindowMs": 5000,
+    "nameMention": true
+  },
+  "groupContext": {
+    "enabled": true,
+    "maxMessages": 48,
+    "maxChars": 3200,
+    "maxAgeMs": 2400000
+  },
+  "groupChime": {
+    "enabled": true,
+    "quietHours": [
+      0,
+      8
+    ],
+    "windowMinutes": 10,
+    "minMessages": 4,
+    "minSpeakers": 2,
+    "minGapMinutes": 0.15,
+    "maxPerGroupPerDay": -1,
+    "maxPerDay": -1,
+    "chance": 0.65,
+    "declineGapMinutes": 1.5,
+    "lingerMs": 6000,
+    "maxWaitMs": 30000,
+    "allowGroups": [],
+    "blockGroups": [],
+    "idleMinutes": 6,
+    "warmRate": 0.7,
+    "hotRate": 1.5,
+    "hotExtraPerDay": 0
+  },
+  "roleMaxChars": 16000,
+  "limits": {
+    "privateCooldownMs": 0,
+    "groupCooldownMs": 0,
+    "globalPerMinute": -1,
+    "perMinute": 8
+  },
+  "humanize": {
+    "enabled": true,
+    "msPerChar": 85,
+    "minMs": 1200,
+    "maxMs": 6000,
+    "jitter": 0.2,
+    "burstMax": 3,
+    "gapRange": [
+      0,
+      0
+    ],
+    "longGapChance": 0,
+    "longGapRange": [
+      3000,
+      9000
+    ]
+  },
+  "stickers": {
+    "cooldownMs": 15000,
+    "maxPerTurn": 1,
+    "maxBytes": 8388608
+  },
+  "vision": {
+    "maxBytes": 8388608
+  }
+}

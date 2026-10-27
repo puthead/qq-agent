@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {SendPacer} from './throttle.js';
+import {GroupChime} from './group-chime.js';
+let t=100000;const times=[];
+const p=new SendPacer({now:()=>t,random:()=>0,sleep:async ms=>{t+=ms;}});
+await Promise.all(Array.from({length:10},()=>p.send('g',async()=>{times.push(t);return {ok:true};})));
+for(let i=1;i<times.length;i++) assert.ok(times[i]-times[i-1]>=5000);
+for(const at of times) assert.ok(times.filter(x=>x>at-60000&&x<=at).length<=8);
+const c=new GroupChime({quietHours:[0,0],maxPerGroupPerDay:-1,maxPerDay:-1,minGapMinutes:0,chance:1,random:()=>0});
+for(let i=0;i<8;i++)c.observe('g',{userId:String(i%2)});
+for(let i=0;i<100;i++)c.noteSpoke('g');assert.equal(c.shouldChime('g',{force:true}).ok,true);
+console.log('PASS 并发串行、5秒最小间隔、滚动8条、每日无限');

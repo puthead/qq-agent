@@ -1,0 +1,66 @@
+# 凭据与密钥（永远不要提交）
+credentials.md
+config.json
+local/
+*.pem
+*.key
+id_ed25519*
+
+# 角色卡：各人自己写，不入库
+role.md
+server-src/role.md
+
+# 真实运行数据（公开梗库除外）
+data/*
+!data/public-memes.json
+tmp/
+测试/
+记忆导入/
+
+# 素材包与生成图
+assets/stickers/
+assets/avatars/*
+dsh-image-gen/
+
+# 个人台账与历史文档（留在本机）
+docs/
+AGENTS.md
+*-共享记忆.md
+项目记忆-开发交接.md
+运维说明.md
+*-role.md
+*记忆系统.md
+六个插件安装交接.md
+手机控制-部署.md
+
+# 工具目录只保留通用脚本
+tools/*
+!tools/companion-control.ps1
+!tools/remove-phone-data.mjs
+!tools/lib
+!tools/lib/cnmeme-client.mjs
+
+# 临时脚本
+tmp-*.mjs
+server-src/tmp-*.mjs
+server-src/_test.mjs
+
+# QQ 登录二维码与临时抓取
+qr-url.txt
+napcat-qr*.png
+qrcode-latest.png
+bv.html
+view.json
+_sandbox_test.txt
+
+# 依赖与缓存
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+
+# 系统文件
+Thumbs.db
+desktop.ini
+.DS_Store
+*能力清单.md

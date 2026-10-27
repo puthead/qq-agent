@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';import os from 'node:os';import path from 'node:path';
+import {publicAddress,publicDownload,parseImages,imageMime,searchStickers,saveWebSticker} from './web-stickers.js';
+import {StickerBook} from './stickers.js';import {toolDefsFor} from './tools.js';
+const dir=fs.mkdtempSync(path.join(os.tmpdir(),'web-stickers-'));
+const book=new StickerBook({dir});
+const png=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jh1sAAAAASUVORK5CYII=','base64');
+try{
+ for(const ip of ['127.0.0.1','10.1.2.3','169.254.169.254','172.16.0.1','192.168.0.1','100.64.0.1','::1','::ffff:127.0.0.1','fc00::1'])assert.equal(publicAddress(ip),false,ip);
+ assert.equal(publicAddress('8.8.8.8'),true);
+ await assert.rejects(publicDownload('file:///etc/passwd',100));
+ await assert.rejects(publicDownload('http://127.0.0.1/',100));
+ assert.throws(()=>imageMime(Buffer.from('<html>not image</html>')));
+ const html='<a m="'+JSON.stringify({murl:'https://example.com/image.png',purl:'https://example.com/',t:'猫 表情包'}).replaceAll('"','&quot;')+'">';
+ assert.equal(parseImages(html+html).length,1);
+ const ctx={stickers:book};
+ const download=async url=>({buffer:url.includes('/images/search?')?Buffer.from(html):png});
+ assert.match(await searchStickers('猫 表情',ctx,download),/web_1_1/);
+ assert.match(saveWebSticker({candidateId:'web_1_1',name:'猫'},ctx),/尚未看到/);
+ ctx.webCandidates.get('web_1_1').viewed=true;
+ ctx.dryRun=true;assert.match(saveWebSticker({candidateId:'web_1_1',name:'猫'},ctx),/未实际/);assert.equal(book.size,0);
+ ctx.dryRun=false;assert.match(saveWebSticker({candidateId:'web_1_1',name:'猫'},ctx),/保存成功/);assert.equal(book.size,1);
+ assert.match(saveWebSticker({candidateId:'web_1_1',name:'猫'},ctx),/已经保存/);
+ await searchStickers('猫',ctx,download);ctx.webCandidates.get('web_2_1').viewed=true;
+ assert.match(saveWebSticker({candidateId:'web_2_1',name:'另一只猫'},ctx),/已收藏过/);assert.equal(book.size,1);
+ assert.match(await searchStickers('猫',ctx,download),/两次/);
+ assert.ok(toolDefsFor({stickers:book}).some(x=>x.function.name==='search_stickers'));
+ assert.ok(!toolDefsFor({}).some(x=>x.function.name==='search_stickers'));
+ console.log('PASS 公网限制、格式验证、搜索解析去重、预览门槛、干跑、落盘与重复图、搜索次数、工具声明');
+}finally{fs.rmSync(dir,{recursive:true,force:true});}
